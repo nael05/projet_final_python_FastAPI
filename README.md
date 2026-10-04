@@ -1,38 +1,63 @@
-# API de médiathèque
+# FastAPI Médiathèque API
 
-## Installation et lancement
+**Projet scolaire individuel**
+Ce projet a été réalisé dans le cadre de mes études en informatique à Ynov Campus. Je l'ai conçu et développé de manière individuelle pour valider mes compétences en développement backend avec Python.
 
-Dans PowerShell, depuis le dossier du projet :
+## Description
+Il s'agit d'une API REST de gestion de médiathèque développée avec FastAPI et SQLite. Elle permet la création, la consultation, la modification et la suppression d'albums musicaux (CRUD complet). L'API inclut un système d'authentification par jeton JWT pour sécuriser les routes de modification, ainsi qu'une documentation Swagger interactive.
 
+## Stack Technique
+- **Python 3.9+** : Langage de programmation principal.
+- **FastAPI** : Framework backend moderne et rapide.
+- **Uvicorn** : Serveur ASGI pour FastAPI.
+- **SQLite** : Base de données locale légère (`albums.db`).
+- **Pydantic** : Validation des données et typage fort.
+- **Pytest** : Framework de tests automatisés.
+
+## Prérequis d'installation
+- Python 3.9 ou supérieur.
+- Pip (gestionnaire de paquets Python).
+
+## Installation et Lancement
+Pour installer et lancer le projet en local, suivez ces commandes (dans PowerShell) :
+
+1. Créez et activez un environnement virtuel, puis installez les dépendances :
 ```powershell
 py -m venv .venv
 .\.venv\Scripts\python.exe -m pip install -r requirements.txt
+```
+
+2. Lancez le serveur de développement :
+```powershell
 .\.venv\Scripts\python.exe -m uvicorn app.main:app --reload
 ```
 
-L’API démarre sur http://127.0.0.1:8000. Swagger est disponible sur http://127.0.0.1:8000/docs.
+L’API démarrera sur http://127.0.0.1:8000. 
+L'interface de test Swagger est disponible sur http://127.0.0.1:8000/docs.
+
+## Compte de démonstration
+L'API inclut un utilisateur par défaut pour tester les routes sécurisées via Swagger (bouton **Authorize**) :
+- Identifiant : `admin`
+- Mot de passe : `Albums2026!`
+(Le jeton expire après 30 minutes).
 
 ## Tests
-
+Pour lancer les tests automatisés :
 ```powershell
 .\.venv\Scripts\python.exe -m pytest
 ```
 
-## Compte de démonstration
-
-- Identifiant : `admin`
-- Mot de passe : `Albums2026!`
-- Dans Swagger, utiliser **Authorize** pour se connecter. Le jeton expire après 30 minutes.
-
-## Fonctionnalités
-
-- Création, consultation, liste, modification et suppression d’albums.
-- Validation du titre, de l’année, de la note et du genre.
-- Stockage SQLite persistant dans `albums.db`.
-- Lecture publique; création, modification et suppression protégées par jeton.
-- Deux tests automatisés : création d’un album et refus sans connexion.
-
-## Non terminé
-
-- Il n’y a qu’un compte de démonstration; l’inscription et le changement de mot de passe ne sont pas implémentés.
-- La clé JWT est générée au démarrage. Les jetons en cours sont invalidés si le serveur redémarre; définir la variable d’environnement `SECRET_KEY` permet d’utiliser une clé stable.
+## Arborescence du Projet
+```
+projet_final_python_FastAPI/
+├── app/               # Code source de l'API FastAPI
+│   ├── main.py        # Point d'entrée de l'application
+│   ├── models.py      # Modèles Pydantic pour la validation
+│   ├── routes.py      # Définition des endpoints API
+│   ├── security.py    # Logique d'authentification et JWT
+│   └── database.py    # Gestion de la connexion SQLite
+├── tests/             # Dossier contenant les tests Pytest
+├── albums.db          # Base de données SQLite persistante
+├── requirements.txt   # Liste des dépendances Python
+└── README.md          # Documentation du projet
+```
